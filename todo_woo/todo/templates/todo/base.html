@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if user.is_authenticated %} 
+        Вы зашли под именем: {{user.username}}
+
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'createtodo' %}">Создать задачу</a>
+        <a href="{% url 'currenttodos' %}">Текущие задачи</a>
+        <a href="{% url 'completedtodo' %}">Выполненные задачи</a> 
+
+        <form action="{% url 'logoutuser' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    {% else %}
+        <a href="#">Войти</a>
+        <a href="#">Зaрегистрироваться</a>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
